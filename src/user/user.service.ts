@@ -10,4 +10,11 @@ export class UserService {
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
   ) {}
+
+  async createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
+    const newUser = new UserEntity();
+    Object.assign(newUser, createUserDto);
+    console.log('newUser', newUser);
+    return await this.userRepository.save(newUser);
+  }
 }
