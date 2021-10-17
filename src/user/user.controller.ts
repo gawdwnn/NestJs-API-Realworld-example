@@ -7,13 +7,13 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { User } from './decorators/user.decorator';
-import { CreateUserDto } from './dto/createUserDto';
-import { LoginUserDto } from './dto/LoginUserDto';
-import { AuthGuard } from './guards/auth.guard';
-import { UserResponseInterface } from './types/user-response.interface';
-import { UserEntity } from './user.entity';
-import { UserService } from './user.service';
+import { User } from '@app/user/decorators/user.decorator';
+import { CreateUserDto } from '@app/user/dto/createUserDto';
+import { LoginUserDto } from '@app/user/dto/LoginUserDto';
+import { AuthGuard } from '@app/user/guards/auth.guard';
+import { UserResponseInterface } from '@app/user/types/user-response.interface';
+import { UserEntity } from '@app/user/user.entity';
+import { UserService } from '@app/user/user.service';
 
 @Controller()
 export class UserController {
