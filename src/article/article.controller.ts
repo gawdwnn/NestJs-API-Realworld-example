@@ -8,6 +8,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -30,6 +31,22 @@ export class ArticleController {
     const article = await this.articleService.createArticle(
       currentUser,
       createArticleDto,
+    );
+    return this.articleService.buildArticleResponse(article);
+  }
+
+  @Put(':slug')
+  @UseGuards(AuthGuard)
+  @UsePipes(new ValidationPipe())
+  async updateArticle(
+    @User('id') currentUserId: number,
+    @Param('slug') slug: string,
+    @Body('article') updateArticleDto: CreateArticleDto,
+  ) {
+    const article = await this.articleService.updateArticle(
+      slug,
+      updateArticleDto,
+      currentUserId,
     );
     return this.articleService.buildArticleResponse(article);
   }
