@@ -1,5 +1,6 @@
 import {
   BeforeInsert,
+  BeforeUpdate,
   Column,
   Entity,
   JoinTable,
@@ -9,6 +10,7 @@ import {
 } from 'typeorm';
 import { hash } from 'bcrypt';
 import { ArticleEntity } from '@app/article/article.entity';
+import { InternalServerErrorException } from '@nestjs/common';
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -31,8 +33,16 @@ export class UserEntity {
   password: string;
 
   @BeforeInsert()
+  @BeforeUpdate()
   async hashPassword() {
-    this.password = await hash(this.password, 10);
+    if (this.password) {
+      try {
+        this.password = await hash(this.password, 10);
+      } catch (error) {
+        console.log(error);
+        throw new InternalServerErrorException();
+      }
+    }
   }
 
   @OneToMany(() => ArticleEntity, (article) => article.author)
