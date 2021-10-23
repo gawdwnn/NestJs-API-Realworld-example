@@ -1,4 +1,4 @@
-import { ArticleType } from './article.type';
+import { ArticleType } from '@app/article/types/article.type';
 
 export interface ArticlesResponseInterface {
   articles: ArticleType[];

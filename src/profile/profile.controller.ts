@@ -8,8 +8,8 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { ProfileService } from './profile.service';
-import { ProfileResponseInterface } from './types/profileResponse.interface';
+import { ProfileService } from '@app/profile/profile.service';
+import { ProfileResponseInterface } from '@app/profile/types/profileResponse.interface';
 
 @Controller('profiles')
 export class ProfileController {
